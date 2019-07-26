@@ -1,0 +1,121 @@
+<DOCTYPE html>
+<html lang="en">
+
+
+
+	<head>
+		<title>Lucky Sevens</title>
+		
+		<script type="text/css">
+		
+			visible {
+				display: block;
+				visibility: visible;
+			}
+			
+			invisible {
+				display: none;
+				visibility: hidden;
+			}
+		
+		
+		</script>
+		
+		<script type="text/javascript">
+			
+			function runProgram(){
+				var start=parseFloat(document.getElementById("money").value);
+				var current=0;
+				var rolls=0;
+				var highest=0;
+				var highestroll=0;
+				if(isNaN(start)||start==null&&start<=0){
+					alert("please enter a valid number greater than 0, this can have a decimal");
+					return;
+				}
+				highest=start;
+				current=start;
+				do{
+					rolls++;
+					var rollValue=Math.ceil(Math.random()*6) + Math.ceil(Math.random()*6);
+					if(rollValue==7){
+						current=current+4;
+						if(current>highest){
+							highest=current;
+							highestroll=rolls;
+						}
+					} else {
+						current--;
+					}
+				} while (current>0);
+			
+				document.getElementById("startvalue").textContent=start+"";
+				document.getElementById("gobroke").textContent=rolls+"";
+				document.getElementById("highest").textContent=highest+"";
+				document.getElementById("rollhighest").textContent=highestroll;
+				document.getElementById("playbutton").textContent="Play Again";
+				document.getElementById("returnInfo").style.visibility="visible";
+				document.getElementById("returnInfo").style.display="block";
+				return;
+			}
+			
+		</script >
+	</head>
+	
+	
+	
+	<body>
+		<h1>Lucky Sevens<h1>
+		<form>
+		<p>Starting Bet:<p>
+		<input id="money" type="text" placeholder="$0.00" /><br/>
+		<button id="playbutton" type="button" onclick="runProgram()">Play</button>
+		
+		</form>
+		
+		<div id="returnInfo" style="display:none; visibility:hidden;">
+		
+			<hr />
+		
+			<h1>Results</h1>
+			
+			<table style="border: 3px solid black; border-collapse: collapse; text-align:left;">
+			
+				<tr>
+					
+					<th>Strarting Bet</th>
+					<th>$<span id="startvalue"></span></th>
+					
+				</tr>
+				<tr>
+					
+					<th>Total Rolls Before Going Broke</th>
+					<th><span id="gobroke"></span></th>
+					
+				</tr>
+				<tr>
+					
+					<th>Highest Amount Won</th>
+					<th>$<span id="highest"></span></th>
+					
+				</tr>
+				<tr>
+					
+					<th>Roll Count at Highest Amount Won</th>
+					<th><span id="rollhighest"></span></th>
+					
+				</tr>
+			
+			</table>
+		</div>
+		
+		
+		
+		
+		
+		
+	</body>
+
+
+
+</html>
